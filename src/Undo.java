@@ -3,7 +3,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Undo {
-//t
+//
     private static Undo instance;
     private static List<WordsGen> wordsGens = new ArrayList<>();
     private static List<String> undo = new ArrayList<>(List.of("***UNDO ITEMS***"));
