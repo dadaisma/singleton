@@ -12,13 +12,15 @@ public class Menu {
 
     public static void mainMenu() {
         do {
-            System.out.println("*** M E N U ***");
-            System.out.println("1- Generate new String");
-            System.out.println("2- Delete String");
-            System.out.println("3- List Strings");
-            System.out.println("4- List Undo");
-            System.out.println("5- Exit");
-            System.out.println("*** Choose an Option ***");
+            System.out.println("""
+            *** M E N U ***
+            1- Generate new String
+            2- Delete String
+            3- List Strings
+            4- List Undo
+            5- Exit
+            *** Choose an Option ***
+            """);
 
             try {
                 option = sc.nextLine();

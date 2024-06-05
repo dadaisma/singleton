@@ -2,23 +2,32 @@
 import java.util.Date;
 import java.util.UUID;
 public class WordsGen {
-    private final String Word;
-    private final Date Date;
+    private static int counter = 1; // Static counter for ID generation
 
-    public WordsGen(){
+    private final int id;
+    private final String word;
+    private final Date date;
 
-        Word = generateRandomString();
-        Date = new Date();
+    public WordsGen() {
+        id = counter++; // Increment counter and assign to ID
+        word = generateRandomString();
+        date = new Date();
     }
-    private String generateRandomString(){
-        return UUID.randomUUID().toString().substring(0,5);
+
+    private String generateRandomString() {
+        return UUID.randomUUID().toString().substring(0, 5);
     }
-    public String getWord(){
-        return Word;
+
+    public String getWord() {
+        return word;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
     public String toString(){
-        return "Random String generated-> "+ Word+ " on: "+Date;
+        return "Random String generated-> "+ " id: " + id + " word: " + word + " on: "+ date;
     }
 }
