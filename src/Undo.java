@@ -1,9 +1,8 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Undo {
-//
+
     private static Undo instance;
     private static List<WordsGen> wordsGens = new ArrayList<>();
     private static List<String> undo = new ArrayList<>(List.of("***UNDO ITEMS***"));
@@ -20,25 +19,26 @@ public class Undo {
         return instance;
     }
 
-    public void remove(String word) {
-        undo.add("option 2 -> remove a String");
-        boolean exist = false;
-        WordsGen wordsGen;
-        Iterator<WordsGen> iterator = wordsGens.iterator();
+    public void remove(String id) {
+        undo.add("option 2 -> remove a String by ID");
 
-        while (iterator.hasNext()) {
-            wordsGen = iterator.next();
-            if (wordsGen != null && wordsGen.getWord().equals(word)) {
-                iterator.remove();
-                System.out.println("String successfully removed!");
-                exist = true;
-                undo.add(REMOVE + wordsGen.getWord());
-            }
+
+        int idToRemove;
+        try {
+            idToRemove = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid ID format: " + id);
+            undo.add("REMOVE invalid ID format: " + id);
+            return;
         }
+        boolean exist = wordsGens.removeIf(wordsGen -> wordsGen != null && wordsGen.getId() == idToRemove);
 
-        if (!exist) {
-            System.out.println("The String does not exist");
-            undo.add(REMOVE + " does not Exist buddy");
+        if (exist) {
+            System.out.println("String successfully removed!");
+            undo.add(REMOVE + idToRemove);
+        } else {
+            System.out.println("The String with id: " + id + " does not exist");
+            undo.add(REMOVE + " does not exist buddy");
         }
     }
 
@@ -55,14 +55,14 @@ public class Undo {
         if (wordsGens.isEmpty()) {
             System.out.println("There are currently no generated Strings in the list.");
         } else {
-            wordsGens.forEach(wordsGen -> System.out.println(wordsGen));
+            wordsGens.forEach(System.out::println);
         }
     }
 
     public void undoList() {
         undo.add("option 4 -> list UNDO History");
-        // Consider enhancing output format for better readability (e.g., timestamps)
-        undo.forEach(undo -> System.out.println(undo));
+
+        undo.forEach(System.out::println);
     }
 
     public static List<String> getUndo() {

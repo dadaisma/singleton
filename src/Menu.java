@@ -1,7 +1,6 @@
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-//
 import static java.lang.System.exit;
 
 public class Menu {
@@ -24,6 +23,11 @@ public class Menu {
 
             try {
                 option = sc.nextLine();
+                if (option.isEmpty()) {
+                    System.out.println("Error, Please enter a valid number (1-5).");
+                    Undo.getUndo().add("Error, Invalid Input, try again (Numbers only)");
+                    continue;
+                }
                 int choice = Integer.parseInt(option); // Validate input as integer
 
                 switch (choice) {
@@ -31,6 +35,7 @@ public class Menu {
                         undo.add(new WordsGen());
                         break;
                     case 2:
+                        undo.list();
                         undo.remove(removeMenu());
                         break;
                     case 3:
@@ -45,7 +50,7 @@ public class Menu {
                         System.out.println("Error, Invalid option!");
                         Undo.getUndo().add("Error, Invalid pick, try again");
                 }
-               // sc.nextLine();
+
             } catch (InputMismatchException e) {
                 System.out.println("Error, Please enter a valid number (1-5).");
                 Undo.getUndo().add("Error, Invalid Input, try again (Numbers only)");
@@ -54,11 +59,11 @@ public class Menu {
                 System.out.println("Error, Input stream has no more data.");
                 Undo.getUndo().add("Error, No Input Detected, try again");
             }
-        } while (true); // Exit when user chooses option 5
+        } while (true);
     }
 
     private static String removeMenu() throws NoSuchElementException {
-        System.out.println("Enter the String to remove: ");
+        System.out.println("Enter the ID of the String to remove: ");
         return sc.nextLine();
     }
 }

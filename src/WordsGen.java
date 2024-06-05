@@ -2,14 +2,14 @@
 import java.util.Date;
 import java.util.UUID;
 public class WordsGen {
-    private static int counter = 1; // Static counter for ID generation
+    private static int counter = 1;
 
     private final int id;
     private final String word;
     private final Date date;
 
     public WordsGen() {
-        id = counter++; // Increment counter and assign to ID
+        id = counter++;
         word = generateRandomString();
         date = new Date();
     }
